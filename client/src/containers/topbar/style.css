@@ -1,0 +1,13 @@
+.navbar{
+    display: flex;
+    align-items:center;
+    padding-top:5px;
+    padding-bottom: 5px;
+    background-color: white;
+}
+#mustlogo{
+    width:60px;
+    height: auto;
+    margin-left:40%;
+    margin-right:20px;
+}
