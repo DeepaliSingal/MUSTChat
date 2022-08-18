@@ -4,6 +4,8 @@ const cors=require('cors');
 
 const loginRouter=require('./routes/login');
 const signinRouter=require('./routes/signin');
+const conversationRouter=require('./routes/conversations');
+const messageRouter=require('./routes/messages');
 
 const app=express();
 
@@ -14,6 +16,8 @@ app.use(express.urlencoded({extended:true}));
 app.use(cors());
 app.use('/login',loginRouter);
 app.use('/signin',signinRouter);
+app.use('/conversations',conversationRouter);
+app.use('/messages',messageRouter);
 
 mongoose.connect(url,{useNewUrlParser:true});
 
