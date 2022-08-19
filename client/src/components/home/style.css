@@ -76,6 +76,18 @@
   cursor: default;
 }
 
+.list-item{
+  font-size:20px;
+  font-weight: 400;
+  list-style: none;
+  margin-top:30px;
+  padding:10px;
+}
+
+.list-item:hover{
+  background-color: white;
+}
+
 @media screen and (max-width: 768px) {
   .chatMenu {
     flex: 1;
