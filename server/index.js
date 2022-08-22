@@ -1,6 +1,7 @@
 const express=require('express');
 const mongoose=require('mongoose');
 const cors=require('cors');
+const path=require('path');
 
 const loginRouter=require('./routes/login');
 const signinRouter=require('./routes/signin');
@@ -8,7 +9,7 @@ const userRouter=require('./routes/user');
 const conversationRouter=require('./routes/conversations');
 const messageRouter=require('./routes/messages');
 
-var environment = process.env.NODE_ENV || 'development';
+var environment = process.env.NODE_ENV || 'production';
 
 const app=express();
 
