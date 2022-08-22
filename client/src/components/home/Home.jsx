@@ -1,7 +1,7 @@
 import React from "react";
 import "../home/style.css";
 import Topbar from "../../containers/topbar/Topbar";
-// import Conversation from "../conversations/Conversation";
+//import Conversation from "../conversations/Conversation";
 import Message from "../message/Message";
 import ChatOnline from "../chatOnline/ChatOnline";
 import { useState } from "react";
@@ -42,7 +42,8 @@ const Home = ({ setLoginUser , user}) => {
   useEffect(()=>{
     const getMessages=async()=>{
       try{
-        const res=await axios.get("http://localhost:9000/messages/"+currentChat?._id);
+        const res=await axios.get("http://localhost:9000/messages/"+currentChat?._id+"/"+user?._id);
+        console.log("current+user",currentChat._id,user._id);
         setMessages(res.data);
       }
       catch(err){
@@ -57,7 +58,7 @@ const Home = ({ setLoginUser , user}) => {
     const message={
       sender:user._id,
       text:newMessage,
-      conversationId:currentChat._id,
+      receiverId:currentChat._id,
     };
 
     try{
@@ -69,6 +70,7 @@ const Home = ({ setLoginUser , user}) => {
       console.log(err);
     }
   }
+
   // useEffect(()=>{
   //   const getConversations = async()=>{
   //     try{

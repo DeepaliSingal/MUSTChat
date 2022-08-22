@@ -16,16 +16,27 @@ router.post("/", async (req, res) => {
 
 //get
 
-router.get("/:conversationId", async (req, res) => {
+router.get("/:receiverId/:senderId", async (req, res) => {
   try {
-    const messages = await Message.find({
-      conversationId: req.params.conversationId,
-    });
+    const messages=await Message.find({
+      "receiverId":{$in:[req.params.receiverId,req.params.senderId]},
+      "sender":{$in:[req.params.receiverId,req.params.senderId]}
+    })
+    // console.log(req.params.receiverId,req.params.senderId);
+    // const messages1 = await Message.find({
+    //   $and:[{"receiverId":req.params.receiverId},
+    //     {"senderId":req.params.senderId}]
+    // });
+    // const messages2 = await Message.find({
+    //   $and:[{"receiverId":{$eq:req.params.senderId}},
+    //     {"senderId": {$eq:req.params.receiverId}}]
+    // });
+    // console.log("messages2",messages2);
+    // const messages=messages1.concat(messages2);
     res.status(200).json(messages);
   } catch (err) {
     res.status(500).json(err);
   }
 });
-
 
 module.exports = router;
