@@ -12,7 +12,7 @@ function App() {
   const [user,setLoginUser]=useState({});
   return (
     <>
-    <Router>
+    <Router basename='/'>
       <Routes>
         <Route exact path="/" element={user&&user._id ? <Home setLoginUser={setLoginUser} user={user}/> : <Login setLoginUser={setLoginUser}/>} /> 
         <Route exact path="/login" element={<Login setLoginUser={setLoginUser}/>} ></Route>

@@ -43,7 +43,6 @@ const Home = ({ setLoginUser , user}) => {
     const getMessages=async()=>{
       try{
         const res=await axios.get("http://localhost:9000/messages/"+currentChat?._id+"/"+user?._id);
-        console.log("current+user",currentChat._id,user._id);
         setMessages(res.data);
       }
       catch(err){

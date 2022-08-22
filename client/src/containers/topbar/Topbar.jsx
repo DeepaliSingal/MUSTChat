@@ -3,7 +3,7 @@ import '../topbar/style.css';
 
 const Topbar = () => {
 
-  const image_url='https://storage.googleapis.com/ezap-prod/colleges/6737/mody-university-school-of-management-studies-sikar-logo.png';
+  const image_url='https://yt3.ggpht.com/a/AATXAJwlJ4x_3C7Yn6H_M0bq9qO47VfK4gLAXWSrrA=s900-c-k-c0xffffffff-no-rj-mo';
   
   return (
     <>
