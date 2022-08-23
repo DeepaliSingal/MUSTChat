@@ -7,6 +7,7 @@ import ChatOnline from "../chatOnline/ChatOnline";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import {io} from "socket.io-client";
 import { useRef } from "react";
 
 const Home = ({ setLoginUser , user}) => {
@@ -16,10 +17,23 @@ const Home = ({ setLoginUser , user}) => {
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  
+  const socket=useRef();
 
   const [conversations,setConversations]=useState([]);
 
   const scrollRef=useRef();
+
+  useEffect(()=>{
+    socket.current=io("ws://localhost:8900");
+  },[]);
+
+  useEffect(()=>{
+    socket.current.emit("addUser",user._id);
+    socket.current.on("getUsers",users=>{
+      console.log(users);
+    })
+  },[user]);
 
   useEffect(()=>{
     const fetchusers = () =>{
