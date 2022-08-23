@@ -17,6 +17,7 @@ const Home = ({ setLoginUser , user}) => {
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [arrivalMessage, setArrivalMessage] = useState(null);
   
   const socket=useRef();
 
@@ -26,7 +27,20 @@ const Home = ({ setLoginUser , user}) => {
 
   useEffect(()=>{
     socket.current=io("ws://localhost:8900");
+    socket.current.on("getMessage",data=>{
+      setArrivalMessage({
+        sender:data.senderId,
+        text:data.text,
+        createdAt:Date.now()
+      })
+    })
   },[]);
+
+  useEffect(()=>{
+    arrivalMessage &&
+    currentChat?._id===arrivalMessage.sender &&
+    setMessages((prev)=>[...prev,arrivalMessage]);
+  },[arrivalMessage,currentChat]);
 
   useEffect(()=>{
     socket.current.emit("addUser",user._id);
@@ -73,6 +87,14 @@ const Home = ({ setLoginUser , user}) => {
       text:newMessage,
       receiverId:currentChat._id,
     };
+
+    const receiverId = currentChat._id;
+
+    socket.current.emit("sendMessage",{
+      senderId:user._id,
+      receiverId,
+      text:newMessage
+    })
 
     try{
       const res=await axios.post("http://localhost:9000/messages",message);
