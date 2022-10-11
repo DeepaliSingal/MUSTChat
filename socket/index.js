@@ -15,8 +15,8 @@ const getUser = (userId) => {
 };
 
 const addUser = (userId, socketId) => {
-    !users.some((user) => user.userId === userId) &&
-      users.push({ userId, socketId });
+    !users.some((user) => user.userId === userId) && 
+    users.push({ userId, socketId });
 };
 
 io.on("connection",(socket)=>{

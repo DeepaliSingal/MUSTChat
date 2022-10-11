@@ -1,7 +1,8 @@
 import React from 'react';
 import '../chatOnline/style.css'
 
-const ChatOnline = () => {
+const ChatOnline = ({onlineUsers,currentId,setCurrentChat}) => {
+  console.log(onlineUsers);
   return (
     <>
     <div className="chatOnline">
@@ -9,7 +10,6 @@ const ChatOnline = () => {
           <div className="chatOnlineImgContainer">
             <div className="chatOnlineBadge"></div>
           </div>
-          <span className="chatOnlineName">Madhavi Sen</span>
         </div>
     </div>
     </>

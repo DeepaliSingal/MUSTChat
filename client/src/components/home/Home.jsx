@@ -18,6 +18,7 @@ const Home = ({ setLoginUser , user}) => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [arrivalMessage, setArrivalMessage] = useState(null);
+  const [onlineUsers,setOnlineUsers] = useState([]);
   
   const socket=useRef();
 
@@ -80,6 +81,17 @@ const Home = ({ setLoginUser , user}) => {
     getMessages();
   },[currentChat]);
 
+  const funcname=(c)=>
+  {
+    if(c._id!==user._id){
+      return (
+      <>
+      <li className="list-item" key={c._id}>{c.name}</li>
+      </>
+        )
+    }
+  }
+
   const handleSubmit = async (e) =>{
     e.preventDefault();
     const message={
@@ -134,7 +146,13 @@ const Home = ({ setLoginUser , user}) => {
             ))} */}
             {conversations.map((c)=>(
               <div onClick={()=>setCurrentChat(c)}>
-                <li className="list-item" key={c._id}>{c._id!==user._id?c.name:""}</li>
+                {/* <li className="list-item" key={c._id}>{c._id!==user._id?c.name:null}</li> */}
+                {/* <li className="list-item" key={c._id}>if (c._id!==user._id) {
+                  c.name
+                }</li> */}
+                {funcname(c)}
+                {/* {if(c._id!==user._id)
+                  <li className="list-item" key={c._id}>{c.name}</li>} */}
               </div>
             ))}
           </div>
@@ -167,11 +185,11 @@ const Home = ({ setLoginUser , user}) => {
           }
           </div>
         </div>
-        <div className="chatOnline">
+        {/* <div className="chatOnline">
           <div className="chatOnlineWrapper">
-            <ChatOnline/>
+            <ChatOnline onlineUsers={onlineUsers} currentId={user._id} setCurrentChat={setCurrentChat}/>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );
